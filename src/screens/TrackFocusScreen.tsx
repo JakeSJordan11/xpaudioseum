@@ -11,10 +11,10 @@ import {
   View,
 } from 'react-native';
 import AudioBar from '../components/AudioBar';
-// import { Audio } from 'expo-av';
+import { Audio } from 'expo-av';
 
 export default function TrackFocusScreen({ route }: any) {
-  // const [sound, setSound] = React.useState<Audio.Sound>();
+  const [sound, setSound] = React.useState<Audio.Sound>();
   const isDarkMode = useColorScheme() === 'dark';
   const { width, height, fontScale } = useWindowDimensions();
   const dynamicStyles = {
@@ -39,7 +39,7 @@ export default function TrackFocusScreen({ route }: any) {
   };
 
 
-  /* async function playSound() {
+  async function handlePlayPress() {
     console.log('Loading Sound');
     const { sound } = await Audio.Sound.createAsync(
       route.params?.source
@@ -58,7 +58,7 @@ export default function TrackFocusScreen({ route }: any) {
       }
       : undefined;
   }, [sound]);
-*/
+
 
   return (
     <SafeAreaView style={[dynamicStyles.container, styles.container]}>
@@ -85,7 +85,7 @@ export default function TrackFocusScreen({ route }: any) {
         </View>
       </ScrollView>
 
-      <AudioBar />
+      <AudioBar onPlayPress={handlePlayPress} />
     </SafeAreaView>
   );
 }
