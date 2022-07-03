@@ -12,8 +12,12 @@ import {
 } from 'react-native';
 import AudioBar from '../components/AudioBar';
 import { Audio } from 'expo-av';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types';
 
-export default function TrackFocusScreen({ route }: any) {
+
+type Props = NativeStackScreenProps<RootStackParamList, 'TrackFocus'>;
+export default function TrackFocusScreen({ route, navigation }: Props) {
   const [sound, setSound] = React.useState<Audio.Sound>();
   const isDarkMode = useColorScheme() === 'dark';
   const { width, height, fontScale } = useWindowDimensions();
@@ -59,6 +63,9 @@ export default function TrackFocusScreen({ route }: any) {
       : undefined;
   }, [sound]);
 
+  function handleBackPress() {
+    navigation.goBack();
+  }
 
   return (
     <SafeAreaView style={[dynamicStyles.container, styles.container]}>
@@ -71,7 +78,7 @@ export default function TrackFocusScreen({ route }: any) {
         style={styles.imageContainer}
         contentContainerStyle={styles.imageContentContainer}>
         <Image
-          source={route.params?.image}
+          source={route.params?.artwork}
           style={[dynamicStyles.image, styles.image]}
         />
         <View style={styles.infoContainer}>
@@ -85,7 +92,7 @@ export default function TrackFocusScreen({ route }: any) {
         </View>
       </ScrollView>
 
-      <AudioBar onPlayPress={handlePlayPress} />
+      <AudioBar onPlayPress={handlePlayPress} onBackPress={handleBackPress} />
     </SafeAreaView>
   );
 }

@@ -9,7 +9,12 @@ import {
 } from 'react-native';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
-export default function AudioBar(props: { onPlayPress: () => void }) {
+interface AudioBarProps {
+  onPlayPress: () => void;
+  onBackPress: () => void;
+}
+
+export default function AudioBar(props: AudioBarProps) {
   const { width, fontScale } = useWindowDimensions();
   const isDarkMode = useColorScheme() === 'dark';
   const dynamicStyles = {
@@ -31,17 +36,14 @@ export default function AudioBar(props: { onPlayPress: () => void }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={[dynamicStyles.controlsContainer, styles.controlsContainer]}>
-        <Pressable>
+        <Pressable onPress={props.onBackPress}>
           <FontAwesome name="chevron-circle-left" style={dynamicStyles.nextPrevious} />
         </Pressable>
         <Pressable onPress={props.onPlayPress}>
           <FontAwesome name="play-circle-o" style={dynamicStyles.playPause} />
         </Pressable>
-        <Pressable>
-          <FontAwesome name="chevron-circle-right" style={dynamicStyles.nextPrevious} />
-        </Pressable>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 

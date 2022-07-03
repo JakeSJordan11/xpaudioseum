@@ -9,8 +9,13 @@ import {
 import AudioCard from '../components/AudioCard';
 import Seperator from '../components/Seperator';
 import { TRACK_DATA } from '../data/TrackData';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { RootStackParamList } from '../types';
 
-export default function TracksScreen({ navigation }: any) {
+
+
+type Props = NativeStackScreenProps<RootStackParamList, 'Tracks'>;
+export default function TracksScreen({ navigation }: Props) {
   const isDarkMode = useColorScheme() === 'dark';
   const dynamicStyles = {
     container: {
@@ -18,13 +23,13 @@ export default function TracksScreen({ navigation }: any) {
     },
   };
 
-  function handleOnPress(item: any) {
+  function handleOnPress(item: RootStackParamList['TrackFocus']) {
     navigation.navigate({
       name: 'TrackFocus',
       params: {
         id: item.id,
         title: item.title,
-        image: item.artwork,
+        artwork: item.artwork,
         source: item.source,
         artist: item.artist,
         notes: item.notes,
