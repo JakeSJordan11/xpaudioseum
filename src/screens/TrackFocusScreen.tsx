@@ -14,10 +14,12 @@ import AudioBar from '../components/AudioBar';
 import { Audio } from 'expo-av';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../types';
+import Animated, { SlideInDown } from 'react-native-reanimated';
 
 
 type Props = NativeStackScreenProps<RootStackParamList, 'TrackFocus'>;
 export default function TrackFocusScreen({ route, navigation }: Props) {
+  const [isPlaying, setIsPlaying] = React.useState(false);
   const [sound, setSound] = React.useState<Audio.Sound>();
   const isDarkMode = useColorScheme() === 'dark';
   const { width, height, fontScale } = useWindowDimensions();
@@ -51,7 +53,13 @@ export default function TrackFocusScreen({ route, navigation }: Props) {
     setSound(sound);
 
     console.log('Playing Sound');
-    await sound.playAsync();
+    isPlaying ? sound.stopAsync() : await sound.playAsync();
+    isPlaying ? setIsPlaying(false) : setIsPlaying(true);
+  }
+
+
+  function handleBackPress() {
+    navigation.goBack();
   }
 
   React.useEffect(() => {
@@ -63,37 +71,39 @@ export default function TrackFocusScreen({ route, navigation }: Props) {
       : undefined;
   }, [sound]);
 
-  function handleBackPress() {
-    navigation.goBack();
-  }
-
   return (
     <SafeAreaView style={[dynamicStyles.container, styles.container]}>
       <StatusBar
         backgroundColor={isDarkMode ? 'hsl(0, 0%, 14%)' : 'hsl(0, 0%, 98%)'}
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
       />
+      <ScrollView contentContainerStyle={styles.imageContentContainer}>
+        <Animated.View entering={SlideInDown.springify().damping(50)} >
+          <Image
+            source={route.params?.artwork}
+            style={[dynamicStyles.image, styles.image]}
+          />
+        </Animated.View>
 
-      <ScrollView
-        style={styles.imageContainer}
-        contentContainerStyle={styles.imageContentContainer}>
-        <Image
-          source={route.params?.artwork}
-          style={[dynamicStyles.image, styles.image]}
-        />
-        <View style={styles.infoContainer}>
-          <Text style={[dynamicStyles.title, styles.title]}>
-            {route.params?.title}
-          </Text>
-          <Text style={[dynamicStyles.underTitle, styles.underTitle]}>
-            jake jordan
-          </Text>
-          <Text style={dynamicStyles.text}>{route.params?.notes}</Text>
-        </View>
+        {/* <Animated.View entering={SlideInDown.duration(400)} > */}
+        <Animated.View entering={SlideInDown.springify().damping(50)} >
+          <View style={styles.infoContainer}>
+            <Text style={[dynamicStyles.title, styles.title]}>
+              {route.params?.title}
+            </Text>
+
+            <Text style={[dynamicStyles.underTitle, styles.underTitle]}>
+              jake jordan
+            </Text>
+
+            <Text style={dynamicStyles.text}>
+              {route.params?.notes}
+            </Text>
+          </View>
+        </Animated.View>
       </ScrollView>
-
-      <AudioBar onPlayPress={handlePlayPress} onBackPress={handleBackPress} />
-    </SafeAreaView>
+      <AudioBar isPlaying={isPlaying} onPlayPress={handlePlayPress} onBackPress={handleBackPress} />
+    </SafeAreaView >
   );
 }
 
@@ -102,12 +112,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   image: {
-    resizeMode: 'cover',
     borderRadius: 20,
-  },
-  imageContainer: {
-    flex: 1,
-    flexDirection: 'column',
   },
   imageContentContainer: {
     alignItems: 'center',
