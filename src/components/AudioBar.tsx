@@ -7,15 +7,17 @@ import {
   useWindowDimensions,
   View,
 } from 'react-native';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faChevronCircleLeft, faCirclePlay, faCircleStop } from '@fortawesome/free-solid-svg-icons';
 
 interface AudioBarProps {
   onPlayPress: () => void;
   onBackPress: () => void;
+  isPlaying: boolean;
 }
 
 export default function AudioBar(props: AudioBarProps) {
-  const { width, fontScale } = useWindowDimensions();
+  const { width } = useWindowDimensions();
   const isDarkMode = useColorScheme() === 'dark';
   const dynamicStyles = {
     controlsContainer: {
@@ -23,13 +25,8 @@ export default function AudioBar(props: AudioBarProps) {
       borderColor: isDarkMode ? 'hsl(0, 0%, 60%)' : 'hsl(0, 0%, 40%)',
       width: width * 0.9,
     },
-    playPause: {
+    icons: {
       color: isDarkMode ? 'hsl(0, 0%, 60%)' : 'hsl(0, 0%, 40%)',
-      fontSize: fontScale * 64,
-    },
-    nextPrevious: {
-      color: isDarkMode ? 'hsl(0, 0%, 60%)' : 'hsl(0, 0%, 40%)',
-      fontSize: fontScale * 48,
     },
   };
 
@@ -37,10 +34,26 @@ export default function AudioBar(props: AudioBarProps) {
     <SafeAreaView style={styles.container}>
       <View style={[dynamicStyles.controlsContainer, styles.controlsContainer]}>
         <Pressable onPress={props.onBackPress}>
-          <FontAwesome name="chevron-circle-left" style={dynamicStyles.nextPrevious} />
+          <FontAwesomeIcon
+            size={32}
+            icon={faChevronCircleLeft}
+            color={dynamicStyles.icons.color}
+          />
         </Pressable>
         <Pressable onPress={props.onPlayPress}>
-          <FontAwesome name="play-circle-o" style={dynamicStyles.playPause} />
+          {props.isPlaying ? (
+            <FontAwesomeIcon
+              size={64}
+              icon={faCircleStop}
+              color={dynamicStyles.icons.color}
+            />
+          ) : (
+            <FontAwesomeIcon
+              size={64}
+              icon={faCirclePlay}
+              color={dynamicStyles.icons.color}
+            />
+          )}
         </Pressable>
       </View>
     </SafeAreaView >
