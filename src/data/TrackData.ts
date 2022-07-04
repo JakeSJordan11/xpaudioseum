@@ -3,7 +3,7 @@ export const TRACK_DATA = [
     id: 1,
     title: 'A Heart So Heavy',
     artwork: require('../../assets/images/AHeartSoHeavy.jpg'),
-    source: require('../../assets/audio/AHeartSoHeavy.wav'),
+    source: require('../../assets/audio/AHeartSoHeavy.mp3'),
     artist: 'Jake Jordan',
     notes:
       'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.',
@@ -30,7 +30,7 @@ export const TRACK_DATA = [
     id: 4,
     title: 'The Great Hope',
     artwork: require('../../assets/images/TheGreatHope.jpg'),
-    source: require('../../assets/audio/TheGreatHope.wav'),
+    source: require('../../assets/audio/TheGreatHope.mp3'),
     artist: 'Jake Jordan',
     notes:
       'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.',
@@ -66,7 +66,7 @@ export const TRACK_DATA = [
     id: 8,
     title: 'Your Call',
     artwork: require('../../assets/images/YourCall.jpg'),
-    source: require('../../assets/audio/YourCall.wav'),
+    source: require('../../assets/audio/YourCall.mp3'),
     artist: 'Jake Jordan',
     notes:
       'Lorem ipsum dolor sit amet, officia excepteur ex fugiat reprehenderit enim labore culpa sint ad nisi Lorem pariatur mollit ex esse exercitation amet. Nisi anim cupidatat excepteur officia. Reprehenderit nostrud nostrud ipsum Lorem est aliquip amet voluptate voluptate dolor minim nulla est proident. Nostrud officia pariatur ut officia. Sit irure elit esse ea nulla sunt ex occaecat reprehenderit commodo officia dolor Lorem duis laboris cupidatat officia voluptate. Culpa proident adipisicing id nulla nisi laboris ex in Lorem sunt duis officia eiusmod. Aliqua reprehenderit commodo ex non excepteur duis sunt velit enim. Voluptate laboris sint cupidatat ullamco ut ea consectetur et est culpa et culpa duis.',
